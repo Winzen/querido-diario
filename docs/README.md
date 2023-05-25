@@ -78,6 +78,8 @@ scrapy crawl <nome_do_raspador> -a start_date=<AAAA-MM-DD>
 ```console
 scrapy crawl <nome_do_raspador> -a end_date=<AAAA-MM-DD>
 ```
+# Antes de começar
+De uma olhada no arquivo [Antes de Começar](/docs/before.md) para ver datalhes que podem facilitar e te orientar antes de começar analisar algum site ou fazer um PR.
 
 # Solução de problemas
 Confira o arquivo de [solução de problemas](/docs/TROUBLESHOOTING.md) para resolver os problemas mais frequentes com a configuração do ambiente do projeto. 
