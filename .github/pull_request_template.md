@@ -14,7 +14,8 @@ abaixo. **NÃO ABRA** um novo Pull Request antes de completar todos os items obr
 - [ ] Tem mais de um site que fornece os diarios.
 - [ ] Mais de 10 anos estão disponiveis para coletar.
 - [ ] PDFs vem com a extenção correta.
-- [ ] Ultilizo de algum "class" predefinido.  
+- [ ] Ultilizo de algum "class" predefinido.
+- [ ] Ouve algum bloqueio de IP ou alguma interropição de conexão durante alguma coleta.
 
 #### Descrição
 
