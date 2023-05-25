@@ -9,12 +9,28 @@
   - [instar](/data_collection/gazette/spiders/base/instar.py)
   - [Sigpub](/data_collection/gazette/spiders/base/sigpub.py)
 
+## Onde se encontra
+
+```console
+ /data_collection/gazette/spiders/base
+```
+
 ## Exemplo de como utilizar
 Basicamente localizado uma classe que você pode estar utilizando.
 
-Basta criar uma novo arquivo dentro de  
+Basta criar uma novo arquivo dentro de:
 
-Exemplo Script completo ➡️ [Link](/data_collection/gazette/spiders/ba_acajutiba.py)
+```console
+/data_collection/gazette/spiders
+```
+Import a class selecionada para o arquivo spider que esta trabalhando
+
+```python
+from gazette.spiders.base.doem import DoemGazetteSpider
+```
+
+Crie uma nova class com a classe prestabelecida selecionada como herança.
+
 ```python
 class BaAcajutibaSpider(DoemGazetteSpider):
     TERRITORY_ID = "2900306"
@@ -22,3 +38,8 @@ class BaAcajutibaSpider(DoemGazetteSpider):
     start_date = date(2018, 1, 2)
     state_city_url_part = "ba/acajutiba"
 ```
+Exemplo Script completo ➡️ [Link](/data_collection/gazette/spiders/ba_acajutiba.py)
+
+# Tempo de coleta
+
+Cuidado com o tempo que as vezes o sniper leva para realizar toda a operação.
