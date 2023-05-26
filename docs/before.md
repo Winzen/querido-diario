@@ -46,7 +46,7 @@ Exemplo Script completo ➡️ [Link](/data_collection/gazette/spiders/ba_acajut
 
 Cuidado com o tempo que as vezes o spider leva para realizar toda a operação. As vezes é necessario notificar isso no seu PR, para uma mudança no disparador de rotina dessa spider.
 
-**O tempo limite de coleta é de 1 hora dentro da rotina**
+**O tempo limite de coleta é de 1 hora nas rotinas de coleta**
 
 # Spiders com mais de um site de coleta.
 
