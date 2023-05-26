@@ -9,7 +9,10 @@
   - [Imprensa Oficial](/data_collection/gazette/spiders/base/imprensa_oficial.py)
   - [instar](/data_collection/gazette/spiders/base/instar.py)
   - [Sigpub](/data_collection/gazette/spiders/base/sigpub.py)
+  
+ Analise se o dominio do site se encaixa em algum deles.
 
+Como os diarios de Nossa Senhora do Socorro `https://doem.org.br/se/nossasenhoradosocorro/diarios` que tem o dominio `Doem` o qual você vai encontrar um `class` que trabalha esse sistema em [Doem](/data_collection/gazette/spiders/base/doem.py)
 ## Onde se encontra
 
 ```console
