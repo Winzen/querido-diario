@@ -3,7 +3,7 @@ from datetime import date
 from gazette.spiders.base.dosp import DospGazetteSpider
 
 
-class PrRioDasPedrasSpider(DospGazetteSpider):
+class SpRioDasPedrasSpider(DospGazetteSpider):
     TERRITORY_ID = "3544004"
     name = "sp_rio_das_pedras"
     code = "5143"
