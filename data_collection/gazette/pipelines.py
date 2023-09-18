@@ -11,6 +11,7 @@ from scrapy.utils import project
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 
+
 from gazette.database.models import Gazette, initialize_database
 
 
@@ -19,6 +20,7 @@ class GazetteDateFilteringPipeline:
         if hasattr(spider, "start_date"):
             if spider.start_date > item.get("date"):
                 raise DropItem("Droping all items before {}".format(spider.start_date))
+
         return item
 
 
@@ -31,9 +33,11 @@ class DefaultValuesPipeline:
     }
 
     def process_item(self, item, spider):
+
         for field in self.default_field_values:
             if field not in item:
                 item[field] = self.default_field_values.get(field)(spider)
+
         return item
 
 
@@ -62,12 +66,16 @@ class SQLDatabasePipeline:
         return mapping
 
     def open_spider(self, spider):
+
         if self.database_url is not None:
             territory_spider_map = self._generate_territory_spider_map()
             engine = initialize_database(self.database_url, territory_spider_map)
             self.Session = sessionmaker(bind=engine)
 
     def process_item(self, item, spider):
+
+
+
         if self.database_url is None:
             return item
 
@@ -136,6 +144,7 @@ class QueridoDiarioFilesPipeline(FilesPipeline):
 
     def get_media_requests(self, item, info):
         """Makes requests from urls and/or lets through ready requests."""
+
         urls = ItemAdapter(item).get(self.files_urls_field, [])
         download_file_headers = getattr(info.spider, "download_file_headers", {})
         yield from (Request(u, headers=download_file_headers) for u in urls)
@@ -167,4 +176,5 @@ class QueridoDiarioFilesPipeline(FilesPipeline):
         # class we replace that with the territory_id and gazette date.
         datestr = item["date"].strftime("%Y-%m-%d")
         filename = Path(filepath).name
+
         return str(Path(item["territory_id"], datestr, filename))

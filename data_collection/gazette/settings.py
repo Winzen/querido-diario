@@ -1,6 +1,7 @@
 import pkg_resources
 from decouple import config
 
+HTTPCACHE_ENABLED = True
 BOT_NAME = "gazette"
 SPIDER_MODULES = ["gazette.spiders"]
 NEWSPIDER_MODULE = "gazette.spiders"
@@ -9,7 +10,6 @@ ITEM_PIPELINES = {
     "gazette.pipelines.GazetteDateFilteringPipeline": 100,
     "gazette.pipelines.DefaultValuesPipeline": 200,
     "gazette.pipelines.QueridoDiarioFilesPipeline": 300,
-    "spidermon.contrib.scrapy.pipelines.ItemValidationPipeline": 400,
     "gazette.pipelines.SQLDatabasePipeline": 500,
 }
 USER_AGENT = (
@@ -18,7 +18,7 @@ USER_AGENT = (
 
 DOWNLOAD_TIMEOUT = 360
 
-FILES_STORE = config("FILES_STORE", default="data")
+FILES_STORE = config("FILES_STORE", default="s3://queridodiariobucket/")
 MEDIA_ALLOW_REDIRECTS = True
 
 EXTENSIONS = {
@@ -30,11 +30,11 @@ SPIDERMON_VALIDATION_SCHEMAS = [
     pkg_resources.resource_filename("gazette", "resources/gazette_schema.json")
 ]
 
-SPIDERMON_VALIDATION_ADD_ERRORS_TO_ITEMS = True
-SPIDERMON_VALIDATION_DROP_ITEMS_WITH_ERRORS = True
+SPIDERMON_VALIDATION_ADD_ERRORS_TO_ITEMS = False
+SPIDERMON_VALIDATION_DROP_ITEMS_WITH_ERRORS = False
 SPIDERMON_SPIDER_CLOSE_MONITORS = ("gazette.monitors.SpiderCloseMonitorSuite",)
-SPIDERMON_MAX_ERRORS = 0
-SPIDERMON_MAX_ITEM_VALIDATION_ERRORS = 0
+SPIDERMON_MAX_ERRORS = 5
+SPIDERMON_MAX_ITEM_VALIDATION_ERRORS = 5
 
 SPIDERMON_DISCORD_FAKE = config("SPIDERMON_DISCORD_FAKE", default=True, cast=bool)
 SPIDERMON_DISCORD_WEBHOOK_URL = config(
@@ -42,17 +42,17 @@ SPIDERMON_DISCORD_WEBHOOK_URL = config(
 )
 
 QUERIDODIARIO_DATABASE_URL = config(
-    "QUERIDODIARIO_DATABASE_URL", default="sqlite:///querido-diario.db"
+    "QUERIDODIARIO_DATABASE_URL", default="postgresql://queridodiario:queridodiario@127.0.0.1:5432/queridodiariodb"
 )
-QUERIDODIARIO_MAX_REQUESTS_ITEMS_RATIO = 5
-QUERIDODIARIO_MAX_DAYS_WITHOUT_GAZETTES = 7
+QUERIDODIARIO_MAX_REQUESTS_ITEMS_RATIO = 7
+QUERIDODIARIO_MAX_DAYS_WITHOUT_GAZETTES = 10
 
 # These settings are needed only when storing downloaded files
 # in a S3 bucket
-AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID", default="")
-AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="")
-AWS_ENDPOINT_URL = config("AWS_ENDPOINT_URL", default="")
-AWS_REGION_NAME = config("AWS_REGION_NAME", default="")
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID", default="minio-access-key")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="minio-secret-key")
+AWS_ENDPOINT_URL = config("AWS_ENDPOINT_URL", default="http://localhost:9000/")
+AWS_REGION_NAME = config("AWS_REGION_NAME", default="us-east-1")
 FILES_STORE_S3_ACL = config("FILES_STORE_S3_ACL", default="public-read")
 
 DOWNLOADER_MIDDLEWARES = {"scrapy_zyte_smartproxy.ZyteSmartProxyMiddleware": 610}
